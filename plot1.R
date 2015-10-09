@@ -1,0 +1,8 @@
+temp <- read.delim("household_power_consumption.txt", header=TRUE, sep=";")
+for(i in 3:9) temp[[i]] <- as.numeric(temp[[i]])
+temp$Date <- as.Date(temp$Date, format="%d/%m/%Y")
+temp$Time <- strptime(as.character(temp$Time), "%H:%M:%S")
+temp2 <- subset(temp, temp$Date>="2007-02-01" & temp$Date<="2007-02-02")
+png("Plot1.png")
+hist(temp2$Global_active_power/1000, xlab = "Global Active Power (kilowatts)", main = "Global Active Power", col = "Red")
+dev.off()
